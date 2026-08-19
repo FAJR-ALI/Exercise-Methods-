@@ -55,24 +55,21 @@ public class Main {
         if (password == null) {
             return false;
         }
-        if (password.length() <= 10) {
+        if (password.length() < 10) {
             return false;
         }
-        boolean hasLetter = false;
         int digitCount = 0;
         for (int i = 0; i < password.length(); i++) {
             char ch = password.charAt(i);
-            if (Character.isLetter(ch)) {
-                hasLetter = true;
-            }
-            else if (Character.isDigit(ch)) {
+            if (Character.isDigit(ch)) {
                 digitCount++;
+            } else if (!Character.isLetter(ch)) {
+                return false;
             }
-            if (hasLetter && digitCount >= 2) {
-                return true;
-            }
+        }
+        if (digitCount >= 2) {
+            return true;
         }
         return false;
     }
-
 }
